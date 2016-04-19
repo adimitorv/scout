@@ -6,3 +6,4 @@
 slidingLayerLib/build/*
 *.iml
 app/build/*
+.idea

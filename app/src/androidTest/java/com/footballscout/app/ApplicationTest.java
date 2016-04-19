@@ -1,4 +1,4 @@
-package com.footballscout.footballscout;
+package com.footballscout.app;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

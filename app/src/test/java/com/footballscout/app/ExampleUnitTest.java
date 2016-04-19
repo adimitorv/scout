@@ -1,4 +1,4 @@
-package com.footballscout.footballscout;
+package com.footballscout.app;
 
 import org.junit.Test;
 

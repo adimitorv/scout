@@ -5,7 +5,7 @@
               android:gravity="center_horizontal"
               android:orientation="vertical"
 
-              tools:context="com.footballscout.footballscout.activity.LoginActivity">
+              tools:context="com.footballscout.app.activity.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -113,10 +113,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/string_or"
                 android:textAllCaps="true"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

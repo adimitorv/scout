@@ -7,9 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -40,11 +37,18 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.footballscout.app.R;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.fabric.sdk.android.Fabric;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -52,6 +56,11 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "kLgyxGoo8vI2AB98i74MQ";
+    private static final String TWITTER_SECRET = "9Lf9hfKIXv3VQtN4QQkmPzrO2MQmcvgNMwmBiGJtV8g";
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -75,10 +84,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     CallbackManager callbackManager;
+    private TwitterLoginButton loginButtonTwitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
@@ -130,27 +142,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 });
 
-
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.footballscout.app", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("zzz:", "KeyHash:  " + Base64.encodeToString(md.digest(), Base64.DEFAULT));
+        loginButtonTwitter = (TwitterLoginButton) findViewById(R.id.login_button_twitter);
+        loginButtonTwitter.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // Do something with result, which provides a TwitterSession for making API calls
             }
-        } catch (PackageManager.NameNotFoundException e) {
 
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-
-
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        loginButtonTwitter.onActivityResult(requestCode, resultCode, data);
     }
 
     private void populateAutoComplete() {

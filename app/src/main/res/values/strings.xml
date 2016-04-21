@@ -22,4 +22,5 @@
     <string name="string_login">Log in</string>
     <string name="string_forgot_password">Forgot password?</string>
     <string name="string_or">or</string>
+    <string name="string_signup">Sign up</string>
 </resources>

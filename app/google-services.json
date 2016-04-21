@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_id": "footballscout-f148d",
+    "project_number": "977534024399",
+    "name": "FootballScout"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977534024399:android:7609b0dcc806558e",
+        "client_id": "android:com.footballscout.app",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.footballscout.app",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977534024399-iin8st12hb0egrlhsc0tkfhd87qbm671.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.footballscout.app",
+            "certificate_hash": "EC4566030D6933FDD0FEE220E336AB4491831D82"
+          }
+        },
+        {
+          "client_id": "977534024399-8fsijmdnosb3h2fdfmt945erf6hcjnec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-37060306-3"
+          }
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

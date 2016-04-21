@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-
+apply plugin: 'com.google.gms.google-services'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
@@ -40,6 +40,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.google.android.gms:play-services:8.3.0'
     compile('com.twitter.sdk.android:twitter:1.13.0@aar') {
         transitive = true;
     }
